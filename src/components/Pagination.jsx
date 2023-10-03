@@ -13,9 +13,7 @@ export default function Pagination({ inputText }) {
       return data;
     }
     const filtered = data.filter((item) => {
-      return item?.car_mf_name
-        .toLowerCase()
-        .includes(inputText.toLowerCase());
+      return item?.car_mf_name.toLowerCase().includes(inputText.toLowerCase());
     });
     setCurrentPage(0);
     return filtered;
@@ -26,6 +24,8 @@ export default function Pagination({ inputText }) {
 
   const handlePageChange = (selectedPage) => {
     setCurrentPage(selectedPage.selected);
+    const newUrl = `/page=${selectedPage?.selected+1}`;
+    window.history.pushState(null, "", newUrl);
   };
 
   const getVisibleData = () => {
@@ -33,6 +33,16 @@ export default function Pagination({ inputText }) {
     const lastIndex = firstIndex + itemsPerPage;
     return filteredData.slice(firstIndex, lastIndex);
   };
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const pageParam = urlParams.get('page');
+
+    if (!pageParam) {
+      // If there's no page parameter in the URL, set it to 1
+      handlePageChange({selected:0});
+    }
+  }, []);
 
   return (
     <>
@@ -57,7 +67,6 @@ export default function Pagination({ inputText }) {
       </div>
       <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
         <div>
-          <span>{currentPage * itemsPerPage + 1}</span> -{" "}
           <span>
             {Math.min((currentPage + 1) * itemsPerPage, filteredData.length)} of{" "}
             {filteredData.length}
