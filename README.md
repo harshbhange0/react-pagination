@@ -1,3 +1,5 @@
+![Peregrination App](Screenshots.png)
+
 # Peregrination App
 
 ## Overview
