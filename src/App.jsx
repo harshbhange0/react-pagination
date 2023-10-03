@@ -1,12 +1,12 @@
-import React from "react";
-import SearchBar from "./components/SearchBar";
+import React from 'react'
 import List from "./components/List";
-import axios from "axios";
 
-export default function App() {
+function App() {
   return (
-    <div className="">
-        <List />
-    </div>
-  );
+    <>
+    <List/>
+    </>
+  )
 }
+
+export default App
