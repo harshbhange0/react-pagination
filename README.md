@@ -1,23 +1,24 @@
-![Peregrination App](Screenshot.png)
+![Pagination App](Screenshot.png)
 
-# Peregrination App
+
+# Pagination App
 
 ## Overview
 
-Peregrination is a web application built with React, Vite, and Tailwind CSS. It allows users to explore and discover various destinations with rich visual content and information. The app includes features like pagination, and it utilizes a data.js file to store essential data, such as images and other information.
+Pagination App is a web application built using React, Vite, and Tailwind CSS. It provides a user-friendly interface for navigating through a list of items, allowing users to explore data with ease. The app utilizes the React-pagination library for efficient pagination and stores data in a `data.js` file.
 
 ## Features
 
-- Explore a curated list of destinations.
-- View detailed information and images for each destination.
-- Navigate through pages using React-pagination.
-- Stylish UI using Tailwind CSS.
+- Seamlessly paginate through a large dataset.
+- Modern and responsive user interface powered by Tailwind CSS.
+- Utilizes the React-pagination library for easy navigation.
+- Data is managed through a `data.js` file, making it easy to update.
 
 ## Technologies Used
 
 - React: A JavaScript library for building user interfaces.
 - Vite: A fast development build tool for web projects.
-- Tailwind CSS: A utility-first CSS framework for building custom designs.
+- Tailwind CSS: A utility-first CSS framework for stylish designs.
 - React-pagination: A pagination library for React applications.
 
 ## Hosted Version
