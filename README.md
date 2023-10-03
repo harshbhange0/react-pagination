@@ -1,4 +1,4 @@
-![Peregrination App](Screenshots.png)
+![Peregrination App](Screenshot.png)
 
 # Peregrination App
 
