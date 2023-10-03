@@ -1,33 +1,45 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import ReactPaginate from "react-paginate";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import Card from "./Card";
 import data from "../assets/data.js";
 
-export default function Pagination() {
-  const [newArray, setNewArray] = useState([]);
-  const [pageCount, setPageCount] = useState(6);
-  const pageChange = (index) => {
-    let currentPage = index?.selected + 1;
-    const lastPageIndex = currentPage * 6;
-    setPageCount(lastPageIndex);
-    const firstPageIndex = lastPageIndex - 6;
-    setNewArray(data.slice(firstPageIndex, lastPageIndex));
-    console.log(newArray);
+export default function Pagination({ inputText }) {
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const filteredData = useMemo(() => {
+    if (inputText.trim() === "") {
+      setCurrentPage(0);
+      return data;
+    }
+    const filtered = data.filter((item) => {
+      return item?.car_mf_name
+        .toLowerCase()
+        .includes(inputText.toLowerCase());
+    });
+    setCurrentPage(0);
+    return filtered;
+  }, [inputText]);
+
+  const itemsPerPage = 6; // Number of items per page
+  const pageCount = Math.ceil(filteredData.length / itemsPerPage);
+
+  const handlePageChange = (selectedPage) => {
+    setCurrentPage(selectedPage.selected);
   };
-  useEffect(() => {
-    const fetchData = () => {
-      const initialData = data.slice(0, 6);
-      setNewArray(initialData);
-    };
-    fetchData();
-  }, []);
+
+  const getVisibleData = () => {
+    const firstIndex = currentPage * itemsPerPage;
+    const lastIndex = firstIndex + itemsPerPage;
+    return filteredData.slice(firstIndex, lastIndex);
+  };
+
   return (
     <>
-      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2  md:grid-cols-3 ">
-        {newArray.map((item, i) => {
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 ">
+        {getVisibleData().map((item, i) => {
           return (
-            <div key={i} className=" flex items-center">
+            <div key={i} className="flex items-center">
               <Card
                 id={item.id}
                 car_n={item.car_modal}
@@ -43,26 +55,33 @@ export default function Pagination() {
           );
         })}
       </div>
-      <div className=" flex flex-col gap-4 sm:flex-row items-center justify-between ">
+      <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
         <div>
-          <span>{pageCount}</span> of <span>{data.length}</span>
+          <span>{currentPage * itemsPerPage + 1}</span> -{" "}
+          <span>
+            {Math.min((currentPage + 1) * itemsPerPage, filteredData.length)} of{" "}
+            {filteredData.length}
+          </span>
         </div>
-        <div>
-          <ReactPaginate
-            previousLabel={<FiArrowLeft />}
-            nextLabel={<FiArrowRight />}
-            pageCount={10}
-            marginPagesDisplayed={3}
-            pageRangeDisplayed={2}
-            onPageChange={pageChange}
-            containerClassName="flex justify-center gap-2 items-center"
-            pageClassName="w-8 bg-white h-8 flex items-center justify-center rounded-md"
-            previousClassName="w-8 bg-white h-8 flex items-center justify-center rounded-md text-xl"
-            nextClassName="w-8 bg-white h-8 flex items-center justify-center rounded-md text-xl"
-            breakClassName="w-8 bg-white h-8 flex items-center justify-center rounded-md text-xl"
-            activeClassName="bg-blue-200 "
-          />
-        </div>
+        {pageCount > 1 && (
+          <div>
+            <ReactPaginate
+              previousLabel={<FiArrowLeft />}
+              nextLabel={<FiArrowRight />}
+              pageCount={pageCount}
+              marginPagesDisplayed={3}
+              pageRangeDisplayed={2}
+              onPageChange={handlePageChange}
+              containerClassName="flex justify-center gap-2 items-center"
+              pageClassName="w-8 h-8 shadow flex items-center justify-center rounded-md"
+              previousClassName="w-8 bg-white h-8 flex items-center justify-center rounded-md text-xl"
+              nextClassName="w-8 bg-white h-8 flex items-center justify-center rounded-md text-xl"
+              breakClassName="w-8 bg-white h-8 flex items-center justify-center rounded-md text-xl"
+              activeClassName="bg-blue-200"
+              activeLinkClassName="text-blue-500"
+            />
+          </div>
+        )}
       </div>
     </>
   );

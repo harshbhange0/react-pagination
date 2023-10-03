@@ -8,6 +8,7 @@ import mg from "./mg.webp";
 import skoda from "./skoda.webp";
 import jeep from "./jeep.webp";
 import renault from "./renault.webp";
+import mahindra from "./mahindra.webp";
 
 const initialData = [
   {
@@ -33,7 +34,7 @@ const initialData = [
   {
     car_mf_name: "Mahindra",
     car_modal: "XUV700",
-    car_img: suzuki,
+    car_img: mahindra,
     car_engine: "Diesel/Petrol",
     car_seating_capacity: "5, 7",
     car_transmission_type: "Automatic",
@@ -143,7 +144,7 @@ const initialData = [
   {
     car_mf_name: "Mahindra",
     car_modal: "XUV700",
-    car_img: suzuki,
+    car_img: mahindra,
     car_engine: "Diesel/Petrol",
     car_seating_capacity: "5, 7",
     car_transmission_type: "Automatic",
@@ -234,7 +235,7 @@ const initialData = [
   {
     car_mf_name: "Mahindra",
     car_modal: "XUV700",
-    car_img: suzuki,
+    car_img: mahindra,
     car_engine: "Diesel/Petrol",
     car_seating_capacity: "5, 7",
     car_transmission_type: "Automatic",
@@ -344,7 +345,7 @@ const initialData = [
   {
     car_mf_name: "Mahindra",
     car_modal: "XUV700",
-    car_img: suzuki,
+    car_img: mahindra,
     car_engine: "Diesel/Petrol",
     car_seating_capacity: "5, 7",
     car_transmission_type: "Automatic",
@@ -434,7 +435,7 @@ const initialData = [
   {
     car_mf_name: "Mahindra",
     car_modal: "XUV700",
-    car_img: suzuki,
+    car_img: mahindra,
     car_engine: "Diesel/Petrol",
     car_seating_capacity: "5, 7",
     car_transmission_type: "Automatic",
@@ -544,7 +545,7 @@ const initialData = [
   {
     car_mf_name: "Mahindra",
     car_modal: "XUV700",
-    car_img: suzuki,
+    car_img: mahindra,
     car_engine: "Diesel/Petrol",
     car_seating_capacity: "5, 7",
     car_transmission_type: "Automatic",
@@ -619,5 +620,4 @@ const addSerialIds = (data) => {
 };
 
 const data = addSerialIds(initialData);
-console.log(data.length);
 export default data;

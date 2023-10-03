@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.shadow {
+  box-shadow: 0 0 0.4rem #cccccca1;
+  background-color: white;
+}
